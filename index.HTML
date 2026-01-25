@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Earth DAO</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body, html {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    transition: background 0.5s ease;
+    cursor: none; /* Oculta el cursor real */
+  }
+
+  #overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 50, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #b0ff90;
+    text-align: center;
+    transition: background 0.5s ease;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px #00ff6a, 0 0 40px #00ff6a;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin: 0 20px;
+    text-shadow: 0 0 10px #00ff6a;
+  }
+
+  .btn-start {
+    margin-top: 30px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border: 2px solid #00ff6a;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    color: #00ff6a;
+    text-decoration: none;
+    transition: 0.3s;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .btn-start:hover {
+    background: #00ff6a;
+    color: #002200;
+    box-shadow: 0 0 20px #00ff6a;
+  }
+
+  /* Cursor personalizado */
+  #custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    background: url('cursor-sun.png') no-repeat center center;
+    background-size: contain;
+    transform: translate(-50%, -50%);
+    transition: background 0.2s ease;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+<div id="overlay">
+  <h1>New Earth DAO</h1>
+  <p>Welcome to our community DAO. Grow together like trees, connecting energy, innovation, and collaboration.</p>
+  <!-- Enlace actualizado: antes era page1.html -->
+  <a href="DAO ENTRY & EXIT GAME PLAN STYLE 3.html" class="btn-start">Enter DAO</a>
+</div>
+
+<!-- Cursor personalizado -->
+<div id="custom-cursor"></div>
+
+<script>
+  const cursor = document.getElementById('custom-cursor');
+  const overlay = document.getElementById('overlay');
+  let lastX = 0;
+
+  document.addEventListener('mousemove', e => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    // Mueve el cursor al mouse
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+
+    // Cambia la imagen según dirección
+    if(mouseX > lastX){
+      cursor.style.backgroundImage = "url('cursor-sun.png')";
+      overlay.style.background = 'rgba(50, 25, 0, 0.4)';
+    } else if(mouseX < lastX){
+      cursor.style.backgroundImage = "url('cursor-moon.png')";
+      overlay.style.background = 'rgba(0, 50, 80, 0.4)';
+    }
+
+    lastX = mouseX;
+  });
+</script>
+
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Protected</title>
+<style>
+  body {
+    user-select: none;      /* No seleccionar texto */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Bloquear clic derecho
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Bloquear copiar, pegar, cortar
+  document.addEventListener('keydown', e => {
+    if (
+      (e.ctrlKey && ['c','v','x','u','s','a'].includes(e.key.toLowerCase())) ||
+      e.key === 'F12'
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  // Bloquear copiar desde selección
+  document.addEventListener('copy', e => e.preventDefault());
+</script>
+
+</body>
+</html>
+
+</html>
