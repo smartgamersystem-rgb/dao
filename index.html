@@ -133,9 +133,9 @@ input{
 /* Video centrado y expandible */
 #heygen-video-container{
   position:fixed;
-  top:70%;        /* altura deseada */
+  top:75%;        /* altura del video más abajo */
   left:50%;
-  transform:translateX(-50%); /* solo centrado horizontal, no vertical */
+  transform:translateX(-50%); /* centrado horizontal */
   display:none; 
   z-index:9997;
   border:2px solid #00ff6a;
@@ -145,8 +145,6 @@ input{
   width:400px;
   max-width:90%;
 }
-
-
 
 #heygen-video{
   width:100%;
@@ -193,7 +191,7 @@ input{
 
 <!-- Contenedor del video -->
 <div id="heygen-video-container">
-  <video id="heygen-video" src="HeyGen - Video Agent_3.mp4" autoplay muted></video>
+  <video id="heygen-video" src="HeyGen - Video Agent_3.mp4"></video>
   <button id="expand-btn">Expand</button>
 </div>
 
@@ -204,7 +202,6 @@ let lastX=0;
 document.addEventListener('mousemove',e=>{
   cursor.style.left=e.clientX+'px';
   cursor.style.top=e.clientY+'px';
-  // Cambia el cursor según dirección
   cursor.style.backgroundImage = e.clientX>lastX
     ? "url('cursor-sun.png')"
     : "url('cursor-moon.png')";
@@ -219,7 +216,6 @@ function closeClaim(){document.getElementById("claim-modal").style.display="none
 const TOTAL_POOL=100_000_000;
 const COMMUNITY_POOL=TOTAL_POOL*0.3;
 const CLAIM_AMOUNT=1_000_000;
-
 const VALID_CODES=["NERA-ALPHA-001","NERA-BETA-002","NERA-GENESIS-003"];
 
 let usedCodes=JSON.parse(localStorage.getItem("usedCodes"))||[];
@@ -261,8 +257,15 @@ window.addEventListener('load',()=>{
     const container=document.getElementById('heygen-video-container');
     const video=document.getElementById('heygen-video');
     container.style.display='block';
-    video.play();
-  },2000); // Espera 2 segundos
+
+    // Espera primer clic del usuario para permitir audio
+    function playAudio(){
+      video.muted = false; // activa el audio
+      video.play();
+      document.removeEventListener('click', playAudio);
+    }
+    document.addEventListener('click', playAudio);
+  },2000);
 });
 
 /* ================= BOTON EXPANDIR ================= */
@@ -281,9 +284,6 @@ expandBtn.addEventListener('click',()=>{
 
 </body>
 </html>
-
-
-
 
 
 
