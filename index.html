@@ -133,9 +133,9 @@ input{
 /* Video centrado y expandible */
 #heygen-video-container{
   position:fixed;
-  top:50%;
+  top:65%;        /* Cambiado de 50% a 65% para bajar el video */
   left:50%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%); /* mantiene centrado horizontalmente */
   display:none; /* se activa con JS */
   z-index:9997;
   border:2px solid #00ff6a;
@@ -145,6 +145,7 @@ input{
   width:400px;
   max-width:90%;
 }
+
 
 #heygen-video{
   width:100%;
@@ -279,4 +280,5 @@ expandBtn.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
