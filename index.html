@@ -19,6 +19,13 @@ html,body{
   cursor:none;
 }
 
+/* Ajuste para móviles */
+@media (max-width:768px){
+  h1{font-size:2.5rem;}
+  p{font-size:1rem;margin:10px;}
+  .btn{padding:.8rem 1.5rem;font-size:1rem;}
+}
+
 /* Overlay principal */
 #overlay{
   position:absolute;
@@ -122,6 +129,19 @@ input{
   color:#ff6666;
   cursor:pointer;
 }
+
+/* Video */
+#heygen-video{
+  position:fixed;
+  bottom:10px;
+  right:10px;
+  width:300px;
+  max-width:90%;
+  border:2px solid #00ff6a;
+  border-radius:12px;
+  display:none; /* Se activa después */
+  z-index:9997;
+}
 </style>
 </head>
 
@@ -147,6 +167,9 @@ input{
 
 <div id="custom-cursor"></div>
 
+<!-- Video HeyGen -->
+<video id="heygen-video" src="HeyGen - Video Agent_3.mp4" autoplay muted></video>
+
 <script>
 /* ================= CURSOR ================= */
 const cursor=document.getElementById('custom-cursor');
@@ -154,6 +177,7 @@ let lastX=0;
 document.addEventListener('mousemove',e=>{
   cursor.style.left=e.clientX+'px';
   cursor.style.top=e.clientY+'px';
+  // Cambia el cursor según dirección
   cursor.style.backgroundImage = e.clientX>lastX
     ? "url('cursor-sun.png')"
     : "url('cursor-moon.png')";
@@ -203,8 +227,18 @@ function generateEncryptedFile(code){
   a.download=`NERA_CLAIM_${key}.txt`;
   a.click();
 }
+
+/* ================= VIDEO HEYGEN ================= */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const video=document.getElementById('heygen-video');
+    video.style.display='block';
+    video.play();
+  },2000); // Espera 2 segundos
+});
 </script>
 
 </body>
 </html>
+
 
