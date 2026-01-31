@@ -14,9 +14,13 @@ html,body{
   height:100%;
   font-family:'Roboto',sans-serif;
   overflow:hidden;
+  cursor:none;
+}
+
+/* Fondo dinámico */
+body{
   background:url('tierra.png') no-repeat center center fixed;
   background-size:cover;
-  cursor:none;
 }
 
 /* Ajuste para móviles */
@@ -130,13 +134,13 @@ input{
   cursor:pointer;
 }
 
-/* Video centrado y expandible */
+/* Video centrado, movable y expandible */
 #heygen-video-container{
   position:fixed;
-  top:75%;        /* altura del video más abajo */
+  top:70%;
   left:50%;
-  transform:translateX(-50%); /* centrado horizontal */
-  display:none; 
+  transform:translateX(-50%);
+  display:none;
   z-index:9997;
   border:2px solid #00ff6a;
   border-radius:12px;
@@ -144,6 +148,7 @@ input{
   background:#000;
   width:400px;
   max-width:90%;
+  cursor:grab;
 }
 
 #heygen-video{
@@ -252,15 +257,15 @@ function generateEncryptedFile(code){
 }
 
 /* ================= VIDEO HEYGEN ================= */
+const container=document.getElementById('heygen-video-container');
+const video=document.getElementById('heygen-video');
 window.addEventListener('load',()=>{
   setTimeout(()=>{
-    const container=document.getElementById('heygen-video-container');
-    const video=document.getElementById('heygen-video');
     container.style.display='block';
 
-    // Espera primer clic del usuario para permitir audio
+    // Audio con primer clic
     function playAudio(){
-      video.muted = false; // activa el audio
+      video.muted = false;
       video.play();
       document.removeEventListener('click', playAudio);
     }
@@ -271,7 +276,6 @@ window.addEventListener('load',()=>{
 /* ================= BOTON EXPANDIR ================= */
 const expandBtn=document.getElementById('expand-btn');
 expandBtn.addEventListener('click',()=>{
-  const container=document.getElementById('heygen-video-container');
   if(container.style.width==='400px'){
     container.style.width='90%';
     container.style.height='auto';
@@ -280,10 +284,54 @@ expandBtn.addEventListener('click',()=>{
     container.style.height='auto';
   }
 });
+
+/* ================= MOVIMIENTO DEL VIDEO ================= */
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+function startDrag(e){
+  isDragging = true;
+  const rect = container.getBoundingClientRect();
+  offsetX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+  offsetY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+  container.style.cursor='grabbing';
+}
+
+function drag(e){
+  if(!isDragging) return;
+  e.preventDefault();
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
+  const y = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
+  container.style.left = x + 'px';
+  container.style.top = y + 'px';
+}
+
+function stopDrag(){
+  isDragging = false;
+  container.style.cursor='grab';
+}
+
+container.addEventListener('mousedown',startDrag);
+container.addEventListener('touchstart',startDrag);
+
+document.addEventListener('mousemove',drag);
+document.addEventListener('touchmove',drag);
+
+document.addEventListener('mouseup',stopDrag);
+document.addEventListener('touchend',stopDrag);
+
+/* ================= FONDO DINÁMICO ================= */
+const backgrounds = ['tierra.png','tierra2.png','tierra3.png'];
+let bgIndex = 0;
+setInterval(()=>{
+  bgIndex = (bgIndex + 1) % backgrounds.length;
+  document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+},5000);
+
 </script>
 
 </body>
 </html>
-
 
 
