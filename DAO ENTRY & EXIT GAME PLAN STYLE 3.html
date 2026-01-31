@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DAO Entry and Exit Game Plan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -157,6 +157,30 @@
       opacity: 1;
     }
 
+    .btn-nera {
+      margin-top: 20px;
+      padding: 1rem 2.5rem;
+      font-size: 1.4rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      text-decoration: none;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      background: linear-gradient(45deg, #00ff6a, #00c2ff, #ff00ff);
+      background-size: 300% 300%;
+      box-shadow: 0 0 15px #00ff6a, 0 0 25px #00c2ff;
+      transition: all 0.4s ease;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    .btn-nera:hover {
+      background-position: 100% 0;
+      box-shadow: 0 0 25px #00ff6a, 0 0 40px #ff00ff;
+      color: #002200;
+      transform: scale(1.1);
+    }
+
     @media (max-width: 600px) {
       .bubble {
         max-width: 90%;
@@ -166,45 +190,19 @@
 </head>
 <body>
 
-<!-- Botón para ir a la siguiente página -->
+<!-- Botones superiores -->
 <a href="ROLE2.HTML" class="btn" style="margin-top: 1rem; display: inline-block;">Next Page</a>
-<!-- Botón para descargar archivo -->
 <a href="https://docs.google.com/document/d/1IV7jkFlehfBP5uRGwt7HtwO9VaQuuyTDKkuIC-Nkmh0/edit?usp=drive_link" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block;">Download File</a>
 
 <header>
   <h1>DAO Entry and Exit Game Plan</h1>
 </header>
-<!-- Botón NERA con estilo avanzado -->
+
 <a href="https://nera.earth/" target="_blank" class="btn-nera">NERA</a>
-
-<style>
-.btn-nera {
-  margin-top: 20px;
-  padding: 1rem 2.5rem;
-  font-size: 1.4rem;
-  font-family: 'Orbitron', sans-serif;
-  color: #fff;
-  text-decoration: none;
-  border: 2px solid transparent;
-  border-radius: 15px;
-  background: linear-gradient(45deg, #00ff6a, #00c2ff, #ff00ff);
-  background-size: 300% 300%;
-  box-shadow: 0 0 15px #00ff6a, 0 0 25px #00c2ff;
-  transition: all 0.4s ease;
-  display: inline-block;
-  text-transform: uppercase;
-}
-
-.btn-nera:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 25px #00ff6a, 0 0 40px #ff00ff;
-  color: #002200;
-  transform: scale(1.1);
-}
-</style>
 
 <main>
 
+  <!-- Sección Solar/Lunar original -->
   <section>
     <h2>🌞 Solar Entry / 🌙 Lunar Exit Explained</h2>
     <p>This DAO works like a living organism, respecting human energy cycles. Members don’t burn out or disappear — they follow active and rest phases.</p>
@@ -225,6 +223,7 @@
     <img id="daoImage" src="dao_cycle.png" alt="DAO Solar-Lunar Cycle Illustration" class="illustration">
   </section>
 
+  <!-- Conversación original -->
   <section>
     <h2>💬 Example Conversation</h2>
     <div class="conversation">
@@ -270,6 +269,61 @@
     </div>
   </section>
 
+  <!-- NUEVA sección Financial/Business Plan en inglés -->
+  <section>
+    <h2>💼 Business Plan / Financial Strategy</h2>
+    <p>Regarding the business plan, it is essential that the DAO also has a clear financial strategy:</p>
+
+    <div class="solar">
+      <h3>Funding Sources</h3>
+      <p>The DAO should have transparent funding sources, which can include member contributions, token sales, external investments, or even income from products and services offered.</p>
+    </div>
+
+    <div class="lunar">
+      <h3>Economic Sustainability</h3>
+      <p>It is important that the DAO has a business model ensuring long-term viability, whether by creating value, generating steady income, or reinvesting profits.</p>
+    </div>
+
+    <div class="solar">
+      <h3>Transparency & Governance</h3>
+      <p>The DAO must have clear and transparent governance mechanisms, allowing members to make collective decisions, with financial information accessible and understandable to all.</p>
+    </div>
+
+    <p>In summary, the business plan complements the entry/exit philosophy, ensuring the DAO not only cares for its members’ well-being but also remains economically viable and sustainable.</p>
+
+    <div class="conversation">
+      <div class="bubble investor">
+        <div class="role">Investor Mark:</div>
+        Juan, I like the DAO philosophy, but how do you ensure funding is stable and long-term?
+      </div>
+
+      <div class="bubble member">
+        <div class="role">Juan (DAO Member):</div>
+        Mark, we maintain transparency with clear sources of funding: member contributions, token sales, external investments, and even product/service income.
+      </div>
+
+      <div class="bubble investor">
+        <div class="role">Mark:</div>
+        And what about sustainability if some members take a break?
+      </div>
+
+      <div class="bubble member">
+        <div class="role">Juan:</div>
+        Even during Lunar Exit, responsibilities are reassigned and contributions are safely stored. The DAO continues operating smoothly and remains financially stable.
+      </div>
+
+      <div class="bubble investor">
+        <div class="role">Mark:</div>
+        So the DAO stays financially viable while respecting members’ cycles?
+      </div>
+
+      <div class="bubble member">
+        <div class="role">Juan:</div>
+        Exactly. Members’ well-being and DAO sustainability go hand in hand.
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -278,8 +332,6 @@
     img.classList.toggle('show');
   }
 </script>
-
-</body>
 
 <script>
   // Bloquear clic derecho
@@ -298,6 +350,7 @@
   // Bloquear copiar desde selección
   document.addEventListener('copy', e => e.preventDefault());
 </script>
+</body>
 </html>
 
 
