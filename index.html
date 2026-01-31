@@ -130,17 +130,39 @@ input{
   cursor:pointer;
 }
 
-/* Video */
-#heygen-video{
+/* Video centrado y expandible */
+#heygen-video-container{
   position:fixed;
-  bottom:10px;
-  right:10px;
-  width:300px;
-  max-width:90%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:none; /* se activa con JS */
+  z-index:9997;
   border:2px solid #00ff6a;
   border-radius:12px;
-  display:none; /* Se activa después */
-  z-index:9997;
+  overflow:hidden;
+  background:#000;
+  width:400px;
+  max-width:90%;
+}
+
+#heygen-video{
+  width:100%;
+  display:block;
+}
+
+#expand-btn{
+  position:absolute;
+  top:5px;
+  right:5px;
+  padding:5px 10px;
+  background:rgba(0,255,106,0.8);
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-family:'Orbitron',sans-serif;
+  font-size:0.9rem;
+  z-index:9999;
 }
 </style>
 </head>
@@ -167,8 +189,11 @@ input{
 
 <div id="custom-cursor"></div>
 
-<!-- Video HeyGen -->
-<video id="heygen-video" src="HeyGen - Video Agent_3.mp4" autoplay muted></video>
+<!-- Contenedor del video -->
+<div id="heygen-video-container">
+  <video id="heygen-video" src="HeyGen - Video Agent_3.mp4" autoplay muted></video>
+  <button id="expand-btn">Expand</button>
+</div>
 
 <script>
 /* ================= CURSOR ================= */
@@ -231,14 +256,27 @@ function generateEncryptedFile(code){
 /* ================= VIDEO HEYGEN ================= */
 window.addEventListener('load',()=>{
   setTimeout(()=>{
+    const container=document.getElementById('heygen-video-container');
     const video=document.getElementById('heygen-video');
-    video.style.display='block';
+    container.style.display='block';
     video.play();
   },2000); // Espera 2 segundos
+});
+
+/* ================= BOTON EXPANDIR ================= */
+const expandBtn=document.getElementById('expand-btn');
+expandBtn.addEventListener('click',()=>{
+  const container=document.getElementById('heygen-video-container');
+  if(container.style.width==='400px'){
+    container.style.width='90%';
+    container.style.height='auto';
+  }else{
+    container.style.width='400px';
+    container.style.height='auto';
+  }
 });
 </script>
 
 </body>
 </html>
-
 
