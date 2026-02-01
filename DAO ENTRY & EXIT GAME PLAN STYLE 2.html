@@ -4,48 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DAO Entry and Exit Game Plan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
+    /* ====== ESTILO FUTURISTA Y BASE ====== */
     body {
       font-family: 'Roboto', sans-serif;
-      background: #f5f7fa;
-      color: #1a1a1a;
+      color: #e0ffe0;
       margin: 0;
       padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(0,255,120,0.3), rgba(0,0,0,0.9)),
+        url('tierra.png') center center/cover no-repeat;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      user-select: none; /* Bloqueo de selección */
     }
 
     header {
-      background: linear-gradient(to right, #283e51, #4b79a1);
+      background: linear-gradient(to right, #0f3, #0c9);
       color: white;
       padding: 2rem;
       text-align: center;
       font-family: 'Playfair Display', serif;
+      box-shadow: 0 0 30px rgba(0,255,120,0.6);
     }
 
     header h1 {
       margin: 0;
       font-size: 2.2rem;
       letter-spacing: 1px;
+      text-shadow: 0 0 15px #0f3, 0 0 25px #0c9;
     }
 
     main {
       padding: 2rem;
-      max-width: 850px;
+      max-width: 900px;
       margin: auto;
     }
 
     section {
       margin-bottom: 2rem;
-      background: white;
+      background: rgba(255,255,255,0.05);
       padding: 2rem;
       border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 20px rgba(0,255,120,0.2);
+      backdrop-filter: blur(10px);
     }
 
     h2 {
-      color: #4b79a1;
+      color: #0f3;
       font-family: 'Playfair Display', serif;
       margin-bottom: 1rem;
+      text-shadow: 0 0 8px #0f3;
     }
 
     p {
@@ -59,15 +69,17 @@
       margin: 1rem 0;
       font-size: 0.95rem;
       line-height: 1.6;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0,255,120,0.4);
     }
 
     .solar {
-      background: #fff8f0;
+      background: rgba(255,248,240,0.2);
       border-left: 6px solid #ffb74d;
     }
 
     .lunar {
-      background: #e8f2ff;
+      background: rgba(232,242,255,0.2);
       border-left: 6px solid #64b5f6;
     }
 
@@ -84,19 +96,21 @@
       border-radius: 20px;
       max-width: 70%;
       position: relative;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 10px rgba(0,255,120,0.2);
     }
 
     .investor {
-      background: #fff3f3;
+      background: rgba(255,0,0,0.1);
       align-self: flex-start;
       border: 2px solid #f28b82;
+      color: #fff;
     }
 
     .member {
-      background: #f0f8ff;
+      background: rgba(0,255,255,0.1);
       align-self: flex-end;
       border: 2px solid #64b5f6;
+      color: #fff;
     }
 
     .bubble::after {
@@ -111,33 +125,82 @@
       left: -12px;
       top: 15px;
       border-width: 6px 12px 6px 0;
-      border-color: transparent #fff3f3 transparent transparent;
+      border-color: transparent rgba(255,0,0,0.1) transparent transparent;
     }
 
     .member::after {
       right: -12px;
       top: 15px;
       border-width: 6px 0 6px 12px;
-      border-color: transparent transparent transparent #f0f8ff;
+      border-color: transparent transparent transparent rgba(0,255,255,0.1);
     }
 
     .role {
       font-weight: bold;
       margin-bottom: 0.3rem;
+      text-shadow: 0 0 5px #0f3;
+    }
+
+    .btn, .btn-nera {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      border-radius: 15px;
+      text-decoration: none;
+      color: #fff;
+      margin: 1rem 0.5rem 1rem 0;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px #0f3, 0 0 25px #0ff;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #0f3, #0ff, #0ff);
+      border: 2px solid transparent;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #0f3, 0 0 40px #0ff;
+      color: #002200;
+    }
+
+    .btn-nera {
+      background: linear-gradient(45deg, #00ff6a, #00c2ff, #ff00ff);
+      background-size: 300% 300%;
+      box-shadow: 0 0 15px #00ff6a, 0 0 25px #00c2ff;
+    }
+
+    .btn-nera:hover {
+      background-position: 100% 0;
+      box-shadow: 0 0 25px #00ff6a, 0 0 40px #ff00ff;
+      color: #002200;
+      transform: scale(1.1);
+    }
+
+    .nera-intro {
+      background: rgba(255,0,255,0.05);
+      border-left: 6px solid #ff00ff;
+      padding: 1.2rem 1.8rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 15px #ff00ff;
     }
 
     @media (max-width: 600px) {
-      .bubble {
-        max-width: 90%;
-      }
+      .bubble { max-width: 90%; }
     }
+
   </style>
 </head>
 <body>
-<!-- Botón para ir a la siguiente página -->
-<a href="ROLE2.HTML" class="btn" style="margin-top: 1rem; display: inline-block;">Next Page</a>
-<!-- Botón para descargar archivo -->
-<a href="https://docs.google.com/document/d/1IV7jkFlehfBP5uRGwt7HtwO9VaQuuyTDKkuIC-Nkmh0/edit?usp=drive_link" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block;">Download File</a>
+
+<!-- Botones superiores -->
+<a href="ROLE2.HTML" class="btn">DAO Entry and Exit Game Plan</a>
+<a href="https://docs.google.com/document/d/1IV7jkFlehfBP5uRGwt7HtwO9VaQuuyTDKkuIC-Nkmh0/edit?usp=drive_link" target="_blank" class="btn">Download File</a>
+<a href="https://nera.earth/" target="_blank" class="btn-nera">NERA</a>
 
 <header>
   <h1>DAO Entry and Exit Game Plan</h1>
@@ -145,6 +208,7 @@
 
 <main>
 
+  <!-- Sección Solar/Lunar -->
   <section>
     <h2>🌞 Solar Entry / 🌙 Lunar Exit Explained</h2>
     <p>This DAO works like a living organism, respecting human energy cycles. Members don’t burn out or disappear — they follow active and rest phases.</p>
@@ -162,6 +226,7 @@
     <p>This system ensures stability for the DAO and confidence for investors: even if key members pause, the project continues smoothly, and all contributions are preserved.</p>
   </section>
 
+  <!-- Conversación ejemplo -->
   <section>
     <h2>💬 Example Conversation</h2>
     <div class="conversation">
@@ -209,28 +274,11 @@
 
 </main>
 
-</body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Protected</title>
-<style>
-  body {
-    user-select: none;      /* No seleccionar texto */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  }
-</style>
-</head>
-<body>
-
 <script>
   // Bloquear clic derecho
   document.addEventListener('contextmenu', e => e.preventDefault());
 
-  // Bloquear copiar, pegar, cortar
+  // Bloquear copiar, pegar, cortar y F12
   document.addEventListener('keydown', e => {
     if (
       (e.ctrlKey && ['c','v','x','u','s','a'].includes(e.key.toLowerCase())) ||
@@ -245,7 +293,5 @@
 </script>
 
 </body>
-</html>
-
 </html>
 

@@ -23,6 +23,39 @@ body{
   background-size:cover;
 }
 
+/* ================== EFECTO ESTRELLAS SUAVE ================== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 70% 80%, rgba(0,255,106,.7), transparent),
+    radial-gradient(1px 1px at 40% 60%, rgba(0,255,255,.6), transparent);
+  animation: starsMove 90s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+
+@keyframes starsMove{
+  from{background-position:0 0}
+  to{background-position:-3000px 3000px}
+}
+
+/* ================== SCANLINES FUTURISTAS ================== */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    rgba(0,255,106,0.035) 1px,
+    transparent 1px
+  );
+  background-size:100% 3px;
+  pointer-events:none;
+  z-index:1;
+}
+
 /* Ajuste para móviles */
 @media (max-width:768px){
   h1{font-size:2.5rem;}
@@ -34,19 +67,35 @@ body{
 #overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,50,0,0.5);
+  background:radial-gradient(circle at center, rgba(0,60,20,.65), rgba(0,0,0,.85));
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   color:#b0ff90;
   text-align:center;
+  backdrop-filter:blur(2px);
+  z-index:2;
 }
 
 h1{
   font-family:'Orbitron',sans-serif;
   font-size:4rem;
   text-shadow:0 0 20px #00ff6a;
+  animation: titlePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse{
+  from{
+    text-shadow:
+      0 0 20px #00ff6a,
+      0 0 40px #00ff6a;
+  }
+  to{
+    text-shadow:
+      0 0 35px #7affc2,
+      0 0 70px #00ff6a;
+  }
 }
 
 p{
@@ -65,12 +114,30 @@ p{
   color:#00ff6a;
   font-family:'Orbitron',sans-serif;
   cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(0,255,106,.6),transparent);
+  transform:translateX(-100%);
+}
+
+.btn:hover::before{
+  animation: energySweep .9s;
+}
+
+@keyframes energySweep{
+  to{transform:translateX(100%)}
 }
 
 .btn:hover{
   background:#00ff6a;
   color:#002200;
-  box-shadow:0 0 20px #00ff6a;
+  box-shadow:0 0 25px #00ff6a;
 }
 
 /* Cursor */
@@ -97,13 +164,13 @@ p{
 }
 
 #claim-box{
-  background:#001a00;
+  background:linear-gradient(180deg,#001a00,#000);
   border:2px solid #00ff6a;
   padding:30px;
   width:360px;
   border-radius:14px;
   text-align:center;
-  box-shadow:0 0 25px #00ff6a;
+  box-shadow:0 0 30px #00ff6a;
 }
 
 #claim-box h2{
@@ -149,6 +216,7 @@ input{
   width:400px;
   max-width:90%;
   cursor:grab;
+  box-shadow:0 0 35px #00ff6a;
 }
 
 #heygen-video{
@@ -194,7 +262,6 @@ input{
 
 <div id="custom-cursor"></div>
 
-<!-- Contenedor del video -->
 <div id="heygen-video-container">
   <video id="heygen-video" src="HeyGen - Video Agent_3.mp4"></video>
   <button id="expand-btn">Expand</button>
@@ -263,7 +330,6 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{
     container.style.display='block';
 
-    // Audio con primer clic
     function playAudio(){
       video.muted = false;
       video.play();
@@ -286,52 +352,46 @@ expandBtn.addEventListener('click',()=>{
 });
 
 /* ================= MOVIMIENTO DEL VIDEO ================= */
-let isDragging = false;
-let offsetX = 0;
-let offsetY = 0;
+let isDragging=false,offsetX=0,offsetY=0;
 
 function startDrag(e){
-  isDragging = true;
-  const rect = container.getBoundingClientRect();
-  offsetX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-  offsetY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+  isDragging=true;
+  const rect=container.getBoundingClientRect();
+  offsetX=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;
+  offsetY=(e.touches?e.touches[0].clientY:e.clientY)-rect.top;
   container.style.cursor='grabbing';
 }
 
 function drag(e){
-  if(!isDragging) return;
+  if(!isDragging)return;
   e.preventDefault();
-  const x = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
-  const y = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
-  container.style.left = x + 'px';
-  container.style.top = y + 'px';
+  const x=(e.touches?e.touches[0].clientX:e.clientX)-offsetX;
+  const y=(e.touches?e.touches[0].clientY:e.clientY)-offsetY;
+  container.style.left=x+'px';
+  container.style.top=y+'px';
 }
 
 function stopDrag(){
-  isDragging = false;
+  isDragging=false;
   container.style.cursor='grab';
 }
 
 container.addEventListener('mousedown',startDrag);
 container.addEventListener('touchstart',startDrag);
-
 document.addEventListener('mousemove',drag);
 document.addEventListener('touchmove',drag);
-
 document.addEventListener('mouseup',stopDrag);
 document.addEventListener('touchend',stopDrag);
 
 /* ================= FONDO DINÁMICO ================= */
-const backgrounds = ['tierra.png','tierra2.png','tierra3.png'];
-let bgIndex = 0;
+const backgrounds=['tierra.png','tierra2.png','tierra3.png'];
+let bgIndex=0;
 setInterval(()=>{
-  bgIndex = (bgIndex + 1) % backgrounds.length;
-  document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+  bgIndex=(bgIndex+1)%backgrounds.length;
+  document.body.style.backgroundImage=`url('${backgrounds[bgIndex]}')`;
 },5000);
-
 </script>
 
 </body>
 </html>
-
 
